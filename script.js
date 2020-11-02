@@ -4,6 +4,7 @@ var scoreEl = document.getElementById("score");
 var questionEl = document.getElementById("question");
 
 // use test button to tune starting the game
+var startEl = document.getElementById("start");
 
 //create timing and score variables
 var totalTime = 60;
@@ -42,3 +43,9 @@ function questionWrite() {
 }
 
 welcomeScreen();
+
+document.addEventListener("click", function() {
+    gameStart();
+    questionText = "This is when we would load the first real question";
+    questionWrite();
+})
