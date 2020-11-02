@@ -1,6 +1,7 @@
 // create variables of all elements in document
 var timeEl = document.getElementById("time");
 var scoreEl = document.getElementById("score");
+
 //create timing and score variables
 var totalTime = 60;
 var timeSpent = 0;
