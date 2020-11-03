@@ -10,6 +10,7 @@ var startEl = document.getElementById("start");
 var totalTime = 60;
 var timeSpent = 0;
 var score = 0;
+var questionIndex = 0;
 
 //create variable to house question text
 var questionText = "";
@@ -21,7 +22,8 @@ function gameStart() {
     scoreEl.textContent = score;
     timeSpent++;
     if (timeSpent > totalTime) {
-      // something happens when time is up
+      // send to the ending screen
+
     }
   }, 1000);
 }
@@ -37,12 +39,44 @@ function scoreUp() {
   score++;
 }
 
+// function to handle correct answers
+function correctSelection() {
+  // increase question index
+  questionIndexIncrease();
+
+  //display message showing answer was correct
+
+
+  // increase the score
+  scoreUp();
+
+}
+
+// function to handel incorrect answers
+function inocrrectSelection() {
+  // display message that the selection was incorrect
+
+  // remove time from the clock will chose amount later
+  timeSpent = timeSpent + 2;
+}
+
 // write questionText to the page
 function questionWrite() {
-    questionEl.textContent = questionText;
+  questionEl.textContent = questionText;
 }
 
 welcomeScreen();
+
+// function that handles increasing question index
+function questionIndexIncrease(){
+  questionIndex++;
+}
+
+function firstQuestion() {
+  questionText = "JavaScript is a type of ";
+  questionWrite();
+  questionIndexIncrease();
+}
 
 document.addEventListener("click", function() {
     gameStart();
