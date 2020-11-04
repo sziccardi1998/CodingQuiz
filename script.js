@@ -5,8 +5,6 @@ var questionEl = document.getElementById("question");
 var responseEl = document.getElementById("response");
 var answerEl  = document.getElementById("answerList");
 var answerStore = [];
-// use test button to tune starting the game
-var startEl = document.getElementById("start");
 
 //create timing and score variables
 var totalTime = 60;
@@ -35,6 +33,9 @@ function gameStart() {
 function welcomeScreen() {
     questionText = "Welcome to the JavaScript timed coding quiz. You will have 60 seconds to answer some amount of questions. Hit the button below to start the quiz!";
     questionWrite();
+    correctIndex = 0;
+    answerStore = ["Start!"];
+    answerRender();
 }
 
 // create function to clear answer options after question is answered correctly
@@ -43,7 +44,7 @@ function answerRender() {
   answerEl.innerHTML = "";
 
   // add new answers to the screen
-  for(var i = 0; i<answerStore.length(); i++){
+  for(var i = 0; i<answerStore.length; i++){
     var answer = answerStore[i];
     var li = document.createElement("li");
     li.textContent = answer;
@@ -69,6 +70,7 @@ function correctSelection() {
   // increase the score
   scoreUp();
 
+  questionNavigation();
 }
 
 // function to handel incorrect answers
@@ -95,25 +97,34 @@ function questionIndexIncrease(){
 function firstQuestion() {
   questionText = "JavaScript is a type of ";
   questionWrite();
-  questionIndexIncrease();
   // write to buttons that will show possible answers
-  while(questionIndex === 1) {
-    // add event listners that are linked to incorrect and correct answer handling
-  }
-  // start the next function
+  answerStore = ["Object Oriented Programming", "Functional Programming"];
+  correctIndex = 0;
+  answerRender();
 }
 
-document.addEventListener("click", function() {
-    gameStart();
-    questionText = "This is when we would load the first real question";
-    questionWrite();
-})
+// create function to move to next question
+function questionNavigation(){
+  if(questionIndex===0){
+    welcomeScreen();
+  }
+  else if(questionIndex===1){
+    firstQuestion();
+  }
+}
 
 answerEl.addEventListener("click", function(event) {
   var choice = event.target;
   // if click on an answer check to see if it is the correct answer
   if (choice.matches("li") === true) {
-    var answerSelection = choice.parentElement.getAttribute("data-index");
+    var answerSelection = choice.getAttribute("data-index");
+    console.log(answerSelection);
+    if (answerSelection == correctIndex){
+      correctSelection();
+    }
+    else{
+      inocrrectSelection();
+    }
   }
 
 
