@@ -9,7 +9,7 @@ var answerStore = [];
 //create timing and score variables
 var totalTime = 60;
 var timeSpent = 0;
-var score = 0;
+var score = -1;
 var questionIndex = 0;
 var correctIndex = 0;
 
@@ -87,7 +87,7 @@ function questionWrite() {
   questionEl.textContent = questionText;
 }
 
-welcomeScreen();
+
 
 // function that handles increasing question index
 function questionIndexIncrease(){
@@ -103,15 +103,38 @@ function firstQuestion() {
   answerRender();
 }
 
+function secondQuestion() {
+  questionText = "Array indexes start at ";
+  questionWrite();
+  answerStore = ["0", "1", "Whatever I set"];
+  correctIndex = 0;
+  answerRender();
+}
+
+function thirdQuestion() {
+  questionText = "Arrays use which type of bracket ";
+  questionWrite();
+  answerStore = ["()", "[]", "{}"];
+  correctIndex = 1;
+  answerRender();
+}
+
 // create function to move to next question
 function questionNavigation(){
   if(questionIndex===0){
     welcomeScreen();
   }
   else if(questionIndex===1){
+    // move to first question and start tracking score and time
     firstQuestion();
+    gameStart();
+  }
+  else if(questionIndex===2){
+    secondQuestion();
   }
 }
+
+questionNavigation();
 
 answerEl.addEventListener("click", function(event) {
   var choice = event.target;
