@@ -3,7 +3,7 @@ var timeEl = document.getElementById("time");
 var scoreEl = document.getElementById("score");
 var questionEl = document.getElementById("question");
 var responseEl = document.getElementById("response");
-var answerEl  = document.getElementById("answerList");
+var answerEl = document.getElementById("answerList");
 var answerStore = [];
 
 //create timing and score variables
@@ -24,18 +24,18 @@ function gameStart() {
     timeSpent++;
     if (timeSpent > totalTime) {
       // send to the ending screen
-
     }
   }, 1000);
 }
 
 // create the intial screen
 function welcomeScreen() {
-    questionText = "Welcome to the JavaScript timed coding quiz. You will have 60 seconds to answer some amount of questions. Hit the button below to start the quiz!";
-    questionWrite();
-    correctIndex = 0;
-    answerStore = ["Start!"];
-    answerRender();
+  questionText =
+    "Welcome to the JavaScript timed coding quiz. You will have 60 seconds to answer some amount of questions. Hit the button below to start the quiz!";
+  questionWrite();
+  correctIndex = 0;
+  answerStore = ["Start!"];
+  answerRender();
 }
 
 // create function to clear answer options after question is answered correctly
@@ -44,7 +44,7 @@ function answerRender() {
   answerEl.innerHTML = "";
 
   // add new answers to the screen
-  for(var i = 0; i<answerStore.length; i++){
+  for (var i = 0; i < answerStore.length; i++) {
     var answer = answerStore[i];
     var li = document.createElement("li");
     li.textContent = answer;
@@ -52,7 +52,6 @@ function answerRender() {
     answerEl.appendChild(li);
   }
 }
-
 
 // create function to handle scoring
 function scoreUp() {
@@ -87,17 +86,16 @@ function questionWrite() {
   questionEl.textContent = questionText;
 }
 
-
-
 // function that handles increasing question index
-function questionIndexIncrease(){
+function questionIndexIncrease() {
   questionIndex++;
 }
 
 function firstQuestion() {
+  //add question text and write to screen
   questionText = "JavaScript is a type of ";
   questionWrite();
-  // write to buttons that will show possible answers
+  // write to list items that will show possible answers
   answerStore = ["Object Oriented Programming", "Functional Programming"];
   correctIndex = 0;
   answerRender();
@@ -112,43 +110,130 @@ function secondQuestion() {
 }
 
 function thirdQuestion() {
-  questionText = "Arrays use which type of bracket ";
+  questionText = "Arrays use which type of bracket?";
   questionWrite();
-  answerStore = ["()", "[]", "{}"];
+  answerStore = ["( )", "[ ]", "{ }"];
+  correctIndex = 1;
+  answerRender();
+}
+
+function fourthQuestion() {
+  questionText = "Which represents the 'or' logical operator?";
+  questionWrite();
+  answerStore = ["!!", "&&", "||"];
+  correctIndex = 2;
+  answerRender();
+}
+
+function fifthQuestion() {
+  questionText = "JSON stands for ";
+  questionWrite();
+  answerStore = [
+    "Just Stored Objects and Numbers",
+    "JavaScript Object Numbers",
+    "JavaScript Object Notation",
+  ];
+  correctIndex = 2;
+  answerRender();
+}
+
+function sixthQuestion() {
+  questionText = "Which character is put at the end of a line?";
+  questionWrite();
+  answerStore = [":", ";", "."];
+  correctIndex = 1;
+  answerRender();
+}
+
+function seventhQuestion() {
+  questionText = "How do you prevent event 'bubbling'?";
+  questionWrite();
+  answerStore = ["event.stopPropogation()", "event.preventDefault()", "event.stopBubble()"];
+  correctIndex = 0;
+  answerRender();
+}
+
+function eighthQuestion() {
+  questionText = "How do you prevent a form from submitting?";
+  questionWrite();
+  answerStore = ["event.stopPropogation()", "event.preventDefault()", "event.stopBubble()"];
+  correctIndex = 1;
+  answerRender();
+}
+
+function ninthQuestion() {
+  questionText = "What comes after the ',' in .addEventListner('', )?";
+  questionWrite();
+  answerStore = ["A function", "A string", "A number", "A boolean"];
+  correctIndex = 0;
+  answerRender();
+}
+
+function tenthQuestion() {
+  questionText = "var example = true; is what kind of variable?";
+  questionWrite();
+  answerStore = ["A string", "A number", "An array", "A boolean"];
+  correctIndex = 3;
+  answerRender();
+}
+
+function eleventhQuestion() {
+  questionText = "Which kind of loop can easily be an infinite loop?";
+  questionWrite();
+  answerStore = ["For Loop", "While Loop"];
   correctIndex = 1;
   answerRender();
 }
 
 // create function to move to next question
-function questionNavigation(){
-  if(questionIndex===0){
+function questionNavigation() {
+  if (questionIndex === 0) {
     welcomeScreen();
-  }
-  else if(questionIndex===1){
+  } else if (questionIndex === 1) {
     // move to first question and start tracking score and time
     firstQuestion();
     gameStart();
-  }
-  else if(questionIndex===2){
+  } else if (questionIndex === 2) {
     secondQuestion();
+  } else if (questionIndex === 3) {
+    thirdQuestion();
+  } else if (questionIndex === 4) {
+    fourthQuestion();
+  } else if (questionIndex === 5) {
+    fifthQuestion();
+  }
+  else if(questionIndex === 6) {
+    sixthQuestion();
+  }
+  else if(questionIndex === 7) {
+    seventhQuestion();
+  }
+  else if(questionIndex === 8) {
+    eighthQuestion();
+  }
+  else if(questionIndex === 9) {
+    ninthQuestion();
+  }
+  else if(questionIndex === 10) {
+    tenthQuestion();
+  }
+  else if(questionIndex === 11) {
+    eleventhQuestion();
   }
 }
 
 questionNavigation();
 
-answerEl.addEventListener("click", function(event) {
+answerEl.addEventListener("click", function (event) {
   var choice = event.target;
   // if click on an answer check to see if it is the correct answer
   if (choice.matches("li") === true) {
     var answerSelection = choice.getAttribute("data-index");
     console.log(answerSelection);
-    if (answerSelection == correctIndex){
+    if (answerSelection == correctIndex) {
       correctSelection();
-    }
-    else{
+    } else {
       inocrrectSelection();
     }
   }
-
-
-})
+});
