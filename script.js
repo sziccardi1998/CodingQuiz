@@ -185,6 +185,46 @@ function eleventhQuestion() {
   answerRender();
 }
 
+function twelthQuestion() {
+  questionText = "If/Else statements are contained in ";
+  questionWrite();
+  answerStore = ["[ ]", "{ }", "( )"];
+  correctIndex = 1;
+  answerRender();
+}
+
+function thirteenthQuestion() {
+  questionText = "If statements are only run if the condition ";
+  questionWrite();
+  answerStore = ["is true", "is false", "the statement always runs"];
+  correctIndex = 0;
+  answerRender();
+}
+
+function fourteenthQuestion() {
+  questionText = "Which for loop will run 4 times?";
+  questionWrite();
+  answerStore = ["for(var i = 0; i < 3; i++)", "for(var i = 0; i < 4; i++)", "for(var i = 0; i < 5; i++)"];
+  correctIndex = 1;
+  answerRender();
+}
+
+function fifteenthQuestion() {
+  questionText = "Which of the following writes to an HTML page?";
+  questionWrite();
+  answerStore = ["alert()", "console.log()", "event.textContent = "];
+  correctIndex = 2;
+  answerRender();
+}
+
+function sixteenthQuestion() {
+  questionText = "What does .trim() do?";
+  questionWrite();
+  answerStore = ["Splits a string in to two parts.", "Trims a string to a defined length.", "Removes white space from the front and back of a string."];
+  correctIndex = 2;
+  answerRender();
+}
+
 // create function to move to next question
 function questionNavigation() {
   if (questionIndex === 0) {
@@ -219,6 +259,21 @@ function questionNavigation() {
   }
   else if(questionIndex === 11) {
     eleventhQuestion();
+  }
+  else if(questionIndex === 12) {
+    twelthQuestion();
+  }
+  else if(questionIndex === 13) {
+    thirteenthQuestion();
+  }
+  else if(questionIndex === 14) {
+    fourteenthQuestion();
+  }
+  else if(questionIndex === 15){
+    fifteenthQuestion();
+  }
+  else if(questionIndex === 16) {
+    sixteenthQuestion();
   }
 }
 
