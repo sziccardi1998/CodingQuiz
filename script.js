@@ -148,7 +148,11 @@ function sixthQuestion() {
 function seventhQuestion() {
   questionText = "How do you prevent event 'bubbling'?";
   questionWrite();
-  answerStore = ["event.stopPropogation()", "event.preventDefault()", "event.stopBubble()"];
+  answerStore = [
+    "event.stopPropogation()",
+    "event.preventDefault()",
+    "event.stopBubble()",
+  ];
   correctIndex = 0;
   answerRender();
 }
@@ -156,7 +160,11 @@ function seventhQuestion() {
 function eighthQuestion() {
   questionText = "How do you prevent a form from submitting?";
   questionWrite();
-  answerStore = ["event.stopPropogation()", "event.preventDefault()", "event.stopBubble()"];
+  answerStore = [
+    "event.stopPropogation()",
+    "event.preventDefault()",
+    "event.stopBubble()",
+  ];
   correctIndex = 1;
   answerRender();
 }
@@ -204,7 +212,11 @@ function thirteenthQuestion() {
 function fourteenthQuestion() {
   questionText = "Which for loop will run 4 times?";
   questionWrite();
-  answerStore = ["for(var i = 0; i < 3; i++)", "for(var i = 0; i < 4; i++)", "for(var i = 0; i < 5; i++)"];
+  answerStore = [
+    "for(var i = 0; i < 3; i++)",
+    "for(var i = 0; i < 4; i++)",
+    "for(var i = 0; i < 5; i++)",
+  ];
   correctIndex = 1;
   answerRender();
 }
@@ -220,7 +232,11 @@ function fifteenthQuestion() {
 function sixteenthQuestion() {
   questionText = "What does .trim() do?";
   questionWrite();
-  answerStore = ["Splits a string in to two parts.", "Trims a string to a defined length.", "Removes white space from the front and back of a string."];
+  answerStore = [
+    "Splits a string in to two parts.",
+    "Trims a string to a defined length.",
+    "Removes white space from the front and back of a string.",
+  ];
   correctIndex = 2;
   answerRender();
 }
@@ -241,38 +257,27 @@ function questionNavigation() {
     fourthQuestion();
   } else if (questionIndex === 5) {
     fifthQuestion();
-  }
-  else if(questionIndex === 6) {
+  } else if (questionIndex === 6) {
     sixthQuestion();
-  }
-  else if(questionIndex === 7) {
+  } else if (questionIndex === 7) {
     seventhQuestion();
-  }
-  else if(questionIndex === 8) {
+  } else if (questionIndex === 8) {
     eighthQuestion();
-  }
-  else if(questionIndex === 9) {
+  } else if (questionIndex === 9) {
     ninthQuestion();
-  }
-  else if(questionIndex === 10) {
+  } else if (questionIndex === 10) {
     tenthQuestion();
-  }
-  else if(questionIndex === 11) {
+  } else if (questionIndex === 11) {
     eleventhQuestion();
-  }
-  else if(questionIndex === 12) {
+  } else if (questionIndex === 12) {
     twelthQuestion();
-  }
-  else if(questionIndex === 13) {
+  } else if (questionIndex === 13) {
     thirteenthQuestion();
-  }
-  else if(questionIndex === 14) {
+  } else if (questionIndex === 14) {
     fourteenthQuestion();
-  }
-  else if(questionIndex === 15){
+  } else if (questionIndex === 15) {
     fifteenthQuestion();
-  }
-  else if(questionIndex === 16) {
+  } else if (questionIndex === 16) {
     sixteenthQuestion();
   }
 }
