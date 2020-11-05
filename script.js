@@ -241,6 +241,48 @@ function sixteenthQuestion() {
   answerRender();
 }
 
+function seventeenthQuestion() {
+  questionText = "Objects are contained within ";
+  questionWrite();
+  answerStore = ["( )", "[ ]", "{ }"];
+  correctIndex = 2;
+  answerRender();
+}
+
+function eighteenthQuestion() {
+  questionText = "Arrays can store ";
+  questionWrite();
+  answerStore = ["Strings", "Numbers", "Booleans", "All of the above"];
+  correctIndex = 3;
+  answerRender();
+}
+
+function nineteenthQuestion() {
+  questionText = "Objects generally store ";
+  questionWrite();
+  answerStore = [
+    "All strings",
+    "All numbers",
+    "Both strings and numbers",
+    "Pieces of related data",
+  ];
+  correctIndex = 3;
+  answerRender();
+}
+
+function twentiethQuestion() {
+  questionText = "A function inside of an object is called ";
+  questionWrite();
+  answerStore = [
+    "an object associated function",
+    "an objective function",
+    "a strategy",
+    "a method",
+  ];
+  correctIndex = 3;
+  answerRender();
+}
+
 // create function to move to next question
 function questionNavigation() {
   if (questionIndex === 0) {
@@ -279,6 +321,14 @@ function questionNavigation() {
     fifteenthQuestion();
   } else if (questionIndex === 16) {
     sixteenthQuestion();
+  } else if (questionIndex === 17) {
+    seventeenthQuestion();
+  } else if (questionIndex === 18) {
+    eighteenthQuestion();
+  } else if (questionIndex === 19) {
+    nineteenthQuestion();
+  } else if (questionIndex === 20) {
+    twentiethQuestion();
   }
 }
 
