@@ -14,6 +14,10 @@ var score = -1;
 var questionIndex = 0;
 var correctIndex = 0;
 var timerBool = true;
+var playerScore = {
+  finalScore: [],
+  playerInitials: [],
+};
 
 //create variable to house question text
 var questionText = "";
@@ -110,11 +114,13 @@ function formCreation() {
   form.setAttribute("id", "initialForm");
   label.setAttribute("for", "Initials");
   label.textContent = "Add Your Initials: ";
+  form.appendChild(formButton);
 }
 
 var form = document.createElement("form");
 var label = document.createElement("label");
 var formInput = document.createElement("input");
+var formButton = document.createElement('button');
 
 function firstQuestion() {
   //add question text and write to screen
@@ -314,11 +320,36 @@ function endScreen() {
   questionText = "Your final score was " + score;
   questionWrite();
   // remove response and answer elements
-  answerEl.remove();
-  responseEl.remove();
+  answerEl.innerHTML = "";
+  responseEl.innerHTML = "";
 
   // add form to the ending screen
   formCreation();
+}
+
+// create function to present scoreboard
+function presentScoreboard() {
+  // change heading to show that scores will be shown
+  questionText = "Recent Scores: ";
+  questionWrite();
+  answerStore = [];
+  // create new page elements to show results
+  var resultsList = document.createElement("ul");
+  formStore.appendChild(resultsList);
+
+  // store the results in the answer array
+  for(var i = 0; i < playerScore.finalScore.length; i++){
+    answerStore.push(playerScore.playerInitials[i] + ": " + playerScore.finalScore[i]);
+  }
+
+  // append results to the result list
+  for (var i = 0; i < answerStore.length; i++) {
+    var answer = answerStore[i];
+    var li = document.createElement("li");
+    li.textContent = answer;
+    resultsList.appendChild(li);
+  }
+  
 }
 
 // create function to move to next question
@@ -389,12 +420,34 @@ answerEl.addEventListener("click", function (event) {
   }
 });
 
-formInput.addEventListener("submit", function(event) {
+formButton.addEventListener("click", function(event) {
   event.preventDefault();
 
   var initialsText = formInput.value.trim();
 
   console.log(initialsText);
+  
+  // get all stored scores and initials
+  var loadedScores = JSON.parse(localStorage.getItem("storedScore"));
+  if(loadedScores !== null){
+    for(var i = 0; i < loadedScores.playerInitials.length; i++){
+    playerScore.finalScore.push(loadedScores.finalScore[i]);
+    playerScore.playerInitials.push(loadedScores.playerInitials[i]);
+    }
+  }
+
+  playerScore.finalScore.push(score);
+  playerScore.playerInitials.push(initialsText);
+  console.log(playerScore);
+
+  localStorage.setItem("storedScore", JSON.stringify(playerScore));
+  
+  // clear out form
+  formStore.innerHTML = "";
 
   // call scoreboard
+
+  presentScoreboard();
+
+
 });
