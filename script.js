@@ -5,6 +5,7 @@ var questionEl = document.getElementById("question");
 var responseEl = document.getElementById("response");
 var answerEl = document.getElementById("answerList");
 var answerStore = [];
+var formStore = document.getElementById("formStore");
 
 //create timing and score variables
 var totalTime = 60;
@@ -12,13 +13,15 @@ var timeSpent = 0;
 var score = -1;
 var questionIndex = 0;
 var correctIndex = 0;
+var timerBool = true;
 
 //create variable to house question text
 var questionText = "";
 
 // create function to handle timing and score board start up
 function gameStart() {
-  setInterval(function () {
+  if(timerBool){
+  gameTimer = setInterval(function () {
     if(totalTime >= timeSpent){
       timeEl.textContent = totalTime - timeSpent;
       scoreEl.textContent = score;
@@ -27,9 +30,12 @@ function gameStart() {
     else {
       // send to the ending screen
       endScreen();
+      timerBool = false;
+      clearInterval(gameTimer);
       return;
     }
   }, 1000);
+  }
 }
 
 // create the intial screen
@@ -95,10 +101,20 @@ function questionIndexIncrease() {
   questionIndex++;
 }
 
-// create function to handle end of game
-function gameEnd() {
-
+// create function to create score form at end of game
+function formCreation() {
+  formStore.appendChild(form);
+  form.appendChild(label);
+  form.appendChild(formInput);
+  formInput.setAttribute("type", "text");
+  form.setAttribute("id", "initialForm");
+  label.setAttribute("for", "Initials");
+  label.textContent = "Add Your Initials: ";
 }
+
+var form = document.createElement("form");
+var label = document.createElement("label");
+var formInput = document.createElement("input");
 
 function firstQuestion() {
   //add question text and write to screen
@@ -300,6 +316,9 @@ function endScreen() {
   // remove response and answer elements
   answerEl.remove();
   responseEl.remove();
+
+  // add form to the ending screen
+  formCreation();
 }
 
 // create function to move to next question
@@ -354,7 +373,7 @@ function questionNavigation() {
   }
 }
 
-questionNavigation();
+welcomeScreen();
 
 answerEl.addEventListener("click", function (event) {
   var choice = event.target;
@@ -368,4 +387,14 @@ answerEl.addEventListener("click", function (event) {
       inocrrectSelection();
     }
   }
+});
+
+formInput.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  var initialsText = formInput.value.trim();
+
+  console.log(initialsText);
+
+  // call scoreboard
 });
