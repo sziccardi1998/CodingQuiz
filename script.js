@@ -19,11 +19,15 @@ var questionText = "";
 // create function to handle timing and score board start up
 function gameStart() {
   setInterval(function () {
-    timeEl.textContent = totalTime - timeSpent;
-    scoreEl.textContent = score;
-    timeSpent++;
-    if (timeSpent > totalTime) {
+    if(totalTime >= timeSpent){
+      timeEl.textContent = totalTime - timeSpent;
+      scoreEl.textContent = score;
+      timeSpent++;
+    }
+    else {
       // send to the ending screen
+      endScreen();
+      return;
     }
   }, 1000);
 }
@@ -89,6 +93,11 @@ function questionWrite() {
 // function that handles increasing question index
 function questionIndexIncrease() {
   questionIndex++;
+}
+
+// create function to handle end of game
+function gameEnd() {
+
 }
 
 function firstQuestion() {
@@ -283,6 +292,16 @@ function twentiethQuestion() {
   answerRender();
 }
 
+//create function to handle the end of the game
+function endScreen() {
+  // display final score
+  questionText = "Your final score was " + score;
+  questionWrite();
+  // remove response and answer elements
+  answerEl.remove();
+  responseEl.remove();
+}
+
 // create function to move to next question
 function questionNavigation() {
   if (questionIndex === 0) {
@@ -329,6 +348,9 @@ function questionNavigation() {
     nineteenthQuestion();
   } else if (questionIndex === 20) {
     twentiethQuestion();
+  }
+  else if (questionIndex === 21) {
+    endScreen();
   }
 }
 
