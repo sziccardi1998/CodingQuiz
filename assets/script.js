@@ -262,7 +262,7 @@ function fourteenthQuestion() {
 function fifteenthQuestion() {
   questionText = "Which of the following writes to an HTML page?";
   questionWrite();
-  answerStore = ["alert()", "console.log()", "event.textContent = "];
+  answerStore = ["alert()", "console.log()", "element.textContent = "];
   correctIndex = 2;
   answerRender();
 }
