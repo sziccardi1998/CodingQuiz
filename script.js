@@ -24,21 +24,20 @@ var questionText = "";
 
 // create function to handle timing and score board start up
 function gameStart() {
-  if(timerBool){
-  gameTimer = setInterval(function () {
-    if(totalTime >= timeSpent){
-      timeEl.textContent = totalTime - timeSpent;
-      scoreEl.textContent = score;
-      timeSpent++;
-    }
-    else {
-      // send to the ending screen
-      endScreen();
-      timerBool = false;
-      clearInterval(gameTimer);
-      return;
-    }
-  }, 1000);
+  if (timerBool) {
+    gameTimer = setInterval(function () {
+      if (totalTime >= timeSpent) {
+        timeEl.textContent = totalTime - timeSpent;
+        scoreEl.textContent = score;
+        timeSpent++;
+      } else {
+        // send to the ending screen
+        endScreen();
+        timerBool = false;
+        clearInterval(gameTimer);
+        return;
+      }
+    }, 1000);
   }
 }
 
@@ -63,6 +62,7 @@ function answerRender() {
     var li = document.createElement("li");
     li.textContent = answer;
     li.setAttribute("data-index", i);
+    li.setAttribute("class", "list-group-item");
     answerEl.appendChild(li);
   }
 }
@@ -120,7 +120,10 @@ function formCreation() {
 var form = document.createElement("form");
 var label = document.createElement("label");
 var formInput = document.createElement("input");
-var formButton = document.createElement('button');
+var formButton = document.createElement("button");
+form.setAttribute("class", "form-inline");
+formButton.setAttribute("class", "btn");
+formInput.setAttribute("class", "form-control");
 
 function firstQuestion() {
   //add question text and write to screen
@@ -336,10 +339,12 @@ function presentScoreboard() {
   // create new page elements to show results
   var resultsList = document.createElement("ul");
   formStore.appendChild(resultsList);
-
+  resultsList.setAttribute("id", "scoreList");
   // store the results in the answer array
-  for(var i = 0; i < playerScore.finalScore.length; i++){
-    answerStore.push(playerScore.playerInitials[i] + ": " + playerScore.finalScore[i]);
+  for (var i = 0; i < playerScore.finalScore.length; i++) {
+    answerStore.push(
+      playerScore.playerInitials[i] + ": " + playerScore.finalScore[i]
+    );
   }
 
   // append results to the result list
@@ -349,7 +354,6 @@ function presentScoreboard() {
     li.textContent = answer;
     resultsList.appendChild(li);
   }
-  
 }
 
 // create function to move to next question
@@ -398,8 +402,7 @@ function questionNavigation() {
     nineteenthQuestion();
   } else if (questionIndex === 20) {
     twentiethQuestion();
-  }
-  else if (questionIndex === 21) {
+  } else if (questionIndex === 21) {
     endScreen();
   }
 }
@@ -420,19 +423,19 @@ answerEl.addEventListener("click", function (event) {
   }
 });
 
-formButton.addEventListener("click", function(event) {
+formButton.addEventListener("click", function (event) {
   event.preventDefault();
 
   var initialsText = formInput.value.trim();
 
   console.log(initialsText);
-  
+
   // get all stored scores and initials
   var loadedScores = JSON.parse(localStorage.getItem("storedScore"));
-  if(loadedScores !== null){
-    for(var i = 0; i < loadedScores.playerInitials.length; i++){
-    playerScore.finalScore.push(loadedScores.finalScore[i]);
-    playerScore.playerInitials.push(loadedScores.playerInitials[i]);
+  if (loadedScores !== null) {
+    for (var i = 0; i < loadedScores.playerInitials.length; i++) {
+      playerScore.finalScore.push(loadedScores.finalScore[i]);
+      playerScore.playerInitials.push(loadedScores.playerInitials[i]);
     }
   }
 
@@ -441,13 +444,11 @@ formButton.addEventListener("click", function(event) {
   console.log(playerScore);
 
   localStorage.setItem("storedScore", JSON.stringify(playerScore));
-  
+
   // clear out form
   formStore.innerHTML = "";
 
   // call scoreboard
 
   presentScoreboard();
-
-
 });

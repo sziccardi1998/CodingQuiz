@@ -1,8 +1,34 @@
 body {
-    color: navy;
-    background-color: lightslategray;
+  color: navy;
+  background-color: lightgrey;
 }
 
 #secondRow {
-    margin-top: 25px;
+  margin-top: 25px;
+}
+
+.list-group-item {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #efb020;
+}
+
+.list-group-item:hover {
+  background-color: #e8cc1c;
+}
+
+.form-control {
+  margin-left: 25px;
+  background-color: #e8cc1c;
+  color: navy;
+}
+
+.form-control:focus {
+  margin-left: 25px;
+  background-color: #e8cc1c;
+  color: navy;
+}
+
+#scoreList {
+  font-size: 20px;
 }
