@@ -4,10 +4,10 @@ var scoreEl = document.getElementById("score");
 var questionEl = document.getElementById("question");
 var responseEl = document.getElementById("response");
 var answerEl = document.getElementById("answerList");
-var answerStore = [];
 var formStore = document.getElementById("formStore");
 
-//create timing and score variables
+//variables for timing navitgation and question functionality
+var answerStore = [];
 var totalTime = 60;
 var timeSpent = 0;
 var score = -1;
@@ -19,11 +19,21 @@ var playerScore = {
   playerInitials: [],
 };
 
+// creation of global variables to be used later
+var form = document.createElement("form");
+var label = document.createElement("label");
+var formInput = document.createElement("input");
+var formButton = document.createElement("button");
+form.setAttribute("class", "form-inline");
+formButton.setAttribute("class", "btn");
+formInput.setAttribute("class", "form-control");
+
 //create variable to house question text
 var questionText = "";
 
 // create function to handle timing and score board start up
 function gameStart() {
+  // after timer hits 0 stop incrementing
   if (timerBool) {
     gameTimer = setInterval(function () {
       if (totalTime >= timeSpent) {
@@ -83,6 +93,7 @@ function correctSelection() {
   // increase the score
   scoreUp();
 
+  // pass to navigation handler
   questionNavigation();
 }
 
@@ -105,7 +116,7 @@ function questionIndexIncrease() {
   questionIndex++;
 }
 
-// create function to create score form at end of game
+// create function to create score list at end of game
 function formCreation() {
   formStore.appendChild(form);
   form.appendChild(label);
@@ -117,14 +128,7 @@ function formCreation() {
   form.appendChild(formButton);
 }
 
-var form = document.createElement("form");
-var label = document.createElement("label");
-var formInput = document.createElement("input");
-var formButton = document.createElement("button");
-form.setAttribute("class", "form-inline");
-formButton.setAttribute("class", "btn");
-formInput.setAttribute("class", "form-control");
-
+// the following question functions have the same structure
 function firstQuestion() {
   //add question text and write to screen
   questionText = "JavaScript is a type of ";
@@ -326,7 +330,7 @@ function endScreen() {
   answerEl.innerHTML = "";
   responseEl.innerHTML = "";
 
-  // add form to the ending screen
+  // add form to the ending screen for initial and score collection
   formCreation();
 }
 
@@ -407,6 +411,7 @@ function questionNavigation() {
   }
 }
 
+// initialize screen on load
 welcomeScreen();
 
 answerEl.addEventListener("click", function (event) {
@@ -424,14 +429,17 @@ answerEl.addEventListener("click", function (event) {
 });
 
 formButton.addEventListener("click", function (event) {
+  // prevent form from submitting
   event.preventDefault();
 
+  // trim and store intials
   var initialsText = formInput.value.trim();
 
   console.log(initialsText);
 
   // get all stored scores and initials
   var loadedScores = JSON.parse(localStorage.getItem("storedScore"));
+  // if previous scores exsist and them to the playerScore object
   if (loadedScores !== null) {
     for (var i = 0; i < loadedScores.playerInitials.length; i++) {
       playerScore.finalScore.push(loadedScores.finalScore[i]);
@@ -439,10 +447,12 @@ formButton.addEventListener("click", function (event) {
     }
   }
 
+  // add current score and initials to object
   playerScore.finalScore.push(score);
   playerScore.playerInitials.push(initialsText);
   console.log(playerScore);
 
+  // store scores and initials for leaderboard
   localStorage.setItem("storedScore", JSON.stringify(playerScore));
 
   // clear out form
